@@ -1,5 +1,6 @@
 import { IUser, IUserRequest } from './../../interfaces/users/index';
 import * as express from 'express';
+import { IAddress } from '../../interfaces/address';
 
 declare global {
   namespace Express {
@@ -9,6 +10,7 @@ declare global {
         isAnnouncer: boolean;
       };
       newUser: IUser;
+      address: IAddress
     }
   }
 }

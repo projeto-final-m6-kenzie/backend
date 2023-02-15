@@ -48,29 +48,30 @@ export const userCreateSchema: SchemaOf<IUser> = yup.object().shape({
 });
 
 const userCreateValidationMiddleware =
-  () => async (req: Request, res: Response, next: NextFunction) => {
-    const userRepository = AppDataSource.getRepository(User);
-    const userFind = await userRepository.findOneBy({ email: req.body.email });
-    if (userFind) {
-      return res.status(400).json({ message: 'This user already exists' });
-    }
+    async (req: Request, res: Response, next: NextFunction) => {
+      const { address, ...user} = req.body
+      const userRepository = AppDataSource.getRepository(User);
+      const userFindByEmail = await userRepository.findOneBy({ email: user.email });
+      const userFindByPhone = await userRepository.findOneBy({ phone: user.phone });
+      if (userFindByEmail || userFindByPhone) {
+        return res.status(400).json({ message: 'This user already exists' });
+      }
 
-    try {
-      const data = req.body;
+      try {
+        const validateData: IUser = await userCreateSchema.validate(user, {
+          abortEarly: false,
+          stripUnknown: true,
+        });
 
-      const validateData: IUser = await userCreateSchema.validate(data, {
-        abortEarly: false,
-        stripUnknown: true,
-      });
+        req.newUser = validateData;
+        req.address = address;
+      } catch (error: any) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
 
-      req.newUser = validateData;
-    } catch (error: any) {
-      return res.status(400).json({
-        error: error.message,
-      });
-    }
-
-    next();
-  };
+      next();
+};
 
 export default userCreateValidationMiddleware;

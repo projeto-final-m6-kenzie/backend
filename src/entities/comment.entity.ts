@@ -1,0 +1,26 @@
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import User from "./user.entity"
+import Vehicle from "./vehicle.entity"
+
+@Entity("comments")
+class Comment {
+    @PrimaryGeneratedColumn("uuid")
+    readonly id: string
+
+    @Column()
+    text: string
+
+    @CreateDateColumn()
+    createdAt: Date
+    
+    @UpdateDateColumn()
+    updatedAt: Date
+    
+    @ManyToOne(() => User, (user) => user.comments)
+    user: User
+
+    @ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)
+    vehicle: Vehicle
+}
+
+export default Comment
