@@ -15,7 +15,7 @@ import userCreateValidationMiddleware from '../middlewares/userCreate.middlware'
 
 const userRouter = () => {
   const router = Router();
-  router.post('', userCreateValidationMiddleware(), createUserController);
+  router.post('', userCreateValidationMiddleware, createUserController);
   router.get('', getUsersController);
   router.get('/:id', getUserByIdController); //middle de auth
   router.patch('/:id', updateUserController); //middle de auth
