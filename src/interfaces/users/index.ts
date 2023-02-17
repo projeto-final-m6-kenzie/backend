@@ -3,6 +3,8 @@ export interface IUserRequest {
   email: string;
   password: string;
   isAnnouncer: boolean;
+  dateOfBirth: string;
+  description: string;
   phone: string;
 }
 
@@ -12,6 +14,8 @@ export interface IUser {
   email: string;
   password?: string;
   isAnnouncer: boolean;
+  dateOfBirth: string;
+  description: string;
   phone: string;
   createdAt: Date;
   updatedAt: Date;
@@ -27,6 +31,8 @@ export interface IUserUpdate {
   email?: string;
   password?: string;
   isAnnouncer?: boolean;
+  dateOfBirth: string;
+  description: string;
   phone?: string;
 }
 

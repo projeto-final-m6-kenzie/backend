@@ -28,6 +28,10 @@ export const userCreateSchema: SchemaOf<IUser> = yup.object().shape({
   isAnnouncer: yup.bool().required('IsAnnouncer is required'),
 
   phone: yup.string().required('Phone is required'),
+  
+  description: yup.string().required('Description is required'),
+
+  dateOfBirth: yup.string().required('Date of Birth is required'),
 
   password: yup
     .string()

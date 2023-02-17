@@ -7,7 +7,7 @@ class Comment {
     @PrimaryGeneratedColumn("uuid")
     readonly id: string
 
-    @Column()
+    @Column({length: 2000})
     text: string
 
     @CreateDateColumn()

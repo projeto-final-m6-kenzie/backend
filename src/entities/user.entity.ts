@@ -25,6 +25,15 @@ class User {
     @Column({unique: true})
     phone: string
 
+    @Column({ type: "date", transformer: {
+        from: (value: Date) => value.toLocaleDateString("pt-BR"),
+        to: (value: string) => new Date(value.split("/").reverse().join("-"))
+    }})
+    dateOfBirth: string
+
+    @Column({length: 2000})
+    description: string
+
     @Column()
     isAnnouncer: boolean
 
