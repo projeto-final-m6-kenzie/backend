@@ -1,9 +1,9 @@
-import AppDataSource from '../data-source';
-import User from '../entities/user.entity';
-import { IUser } from '../interfaces/users';
+import AppDataSource from '../../data-source';
+import User from '../../entities/user.entity';
+import { IUser } from '../../interfaces/users';
 import { v4 as uuidv4 } from 'uuid';
-import { IAddress } from '../interfaces/address';
-import createAddressService from './address/createAdress.service';
+import { IAddress } from '../../interfaces/address';
+import createAddressService from './../address/createAdress.service';
 
 const createUserService = async (data: IUser, address: IAddress) => {
   const userRepository = AppDataSource.getRepository(User);

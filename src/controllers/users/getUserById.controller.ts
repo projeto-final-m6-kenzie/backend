@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { instanceToPlain } from 'class-transformer';
-import getUserByIdService from '../services/getUserById.service';
+import getUserByIdService from '../../services/users/getUserById.service';
 
 const getUserByIdController = async (req: Request, res: Response) => {
   const { id } = req.params;

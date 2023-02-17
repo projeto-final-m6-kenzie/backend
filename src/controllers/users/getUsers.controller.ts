@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { instanceToPlain } from 'class-transformer';
-import getUsersService from '../services/getUsers.service';
+import getUsersService from '../../services/users/getUsers.service';
 
 const getUsersController = async (req: Request, res: Response) => {
   const users = await getUsersService();

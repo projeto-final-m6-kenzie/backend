@@ -13,7 +13,7 @@ export enum AnnouncementType {
     SALE = "Sale"
 }
 
-@Entity("veicules")
+@Entity("vehicles")
 class Vehicle {
     @PrimaryColumn("uuid")
     readonly id: string
@@ -30,7 +30,7 @@ class Vehicle {
         type: "enum",
         enum: VeiculeType,
     })
-    veicule_type: VeiculeType
+    veiculeType: VeiculeType
 
     @Column()
     year: string
