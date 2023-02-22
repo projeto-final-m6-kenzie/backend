@@ -4,7 +4,7 @@ import vehicleRouter from './vehicle.routes';
 
 const appRouter = (app: Express) => {
   app.use('/users', userRouter());
-  app.use('/vehicle', vehicleRouter())
+  app.use('/vehicles', vehicleRouter())
 };
 
 export default appRouter;

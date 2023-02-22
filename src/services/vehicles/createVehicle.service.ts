@@ -1,6 +1,7 @@
 import AppDataSource from "../../data-source";
 import User from "../../entities/user.entity";
 import Vehicle from "../../entities/vehicle.entity";
+import VehicleImage from "../../entities/vehicle_image.entity";
 import AppError from "../../errors/AppErrors";
 import { IAuthReq } from "../../interfaces/users";
 import { IVehicle } from "../../interfaces/vehicles";
@@ -17,18 +18,22 @@ const createVehicleService = async (data: IVehicle, user: IAuthReq) => {
         throw new AppError("User not found", 404)
     }
 
+    const {coverPhoto, ...dataVehicle} = data
+
+    const vehicleImageRepository = AppDataSource.getRepository(VehicleImage)
+    const vehicleImage = vehicleImageRepository.create(coverPhoto)
+
     const vehicleRepository = AppDataSource.getRepository(Vehicle)
-
-    const vehicle = vehicleRepository.create(data)
+    const vehicle = vehicleRepository.create(dataVehicle)
+   
     vehicle.user = userRequest
-    await vehicleRepository.save(vehicle)
+    vehicle.coverPhoto = vehicleImage
 
-    //##########
-    console.log(vehicle)
-    if (!vehicle) {
-        throw new AppError("A requisição é inválida")
-    }
-    //##########
+    await vehicleRepository.save(vehicle).catch(err => {
+        if (err) {
+          throw new AppError("Requisição incorreta. Confira os campos obrigatórios")
+        }
+    })
 
     return vehicle
 }

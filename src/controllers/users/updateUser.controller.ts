@@ -6,9 +6,9 @@ import updateUserService from '../../services/users/updateUser.service';
 const updateUserController = async (req: Request, res: Response) => {
   const data: IUserUpdate = req.body;
   const { id } = req.params;
-  const updateUser = await updateUserService(data, id);
+  const updatedUser = await updateUserService(data, id);
 
-  return res.status(202).json(instanceToPlain(updateUser));
+  return res.status(202).json(instanceToPlain(updatedUser));
 };
 
 export default updateUserController;

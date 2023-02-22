@@ -26,10 +26,10 @@ class User {
     phone: string
 
     @Column({ type: "date", transformer: {
-        from: (value: Date) => value.toLocaleDateString("pt-BR"),
-        to: (value: string) => new Date(value.split("/").reverse().join("-"))
-    }})
-    dateOfBirth: string
+        from: (value: string) => value.split("-").reverse().join("/"),
+        to: (value: string) => value
+    } })
+    dateOfBirth: Date
 
     @Column({length: 2000})
     description: string

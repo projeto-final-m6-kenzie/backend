@@ -1,9 +1,9 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import Comment from "./comment.entity"
 import User from "./user.entity"
 import VehicleImage from "./vehicle_image.entity"
 
-export enum VeiculeType {
+export enum VehicleType {
     CAR = "Car",
     MOTORBIKE = "Motorbike"
 }
@@ -15,7 +15,7 @@ export enum AnnouncementType {
 
 @Entity("vehicles")
 class Vehicle {
-    @PrimaryColumn("uuid")
+    @PrimaryGeneratedColumn("uuid")
     readonly id: string
 
     @Column({length: 30})
@@ -28,9 +28,9 @@ class Vehicle {
 
     @Column({
         type: "enum",
-        enum: VeiculeType,
+        enum: VehicleType,
     })
-    veiculeType: VeiculeType
+    vehicleType: VehicleType
 
     @Column()
     year: string
@@ -40,6 +40,9 @@ class Vehicle {
         scale: 2
     })
     km: number
+
+    @Column({length: 2000})
+    description: string
 
     @Column({
         type: "enum",
@@ -54,6 +57,15 @@ class Vehicle {
         scale: 2
     })
     price: number    
+
+    @Column({
+        default: true,
+        nullable: true
+    })
+    published: boolean
+
+    @OneToOne(() => VehicleImage)
+    coverPhoto: VehicleImage;
 
     @CreateDateColumn()
     createdAt: Date
