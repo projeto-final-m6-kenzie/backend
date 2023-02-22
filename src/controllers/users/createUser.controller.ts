@@ -7,7 +7,6 @@ import { IAddress } from '../../interfaces/address';
 const createUserController = async (req: Request, res: Response) => {
   const address: IAddress = req.address
   const user: IUser = req.newUser;
-  console.log(user)
   const createUser = await createUserService(user, address);
   return res.status(201).json(instanceToInstance(createUser));
 };

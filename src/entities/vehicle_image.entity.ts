@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import Vehicle from "./vehicle.entity";
 
 @Entity("vehicle_images")
@@ -9,11 +9,11 @@ class VehicleImage {
     @Column()
     url: string
 
-    @Column({default: false})
-    isMainImg: boolean
-
     @ManyToOne(() => Vehicle, (vehicle) => vehicle.images)
     vehicle: Vehicle
+
+    @OneToOne(() => Vehicle, (vehicle) => vehicle.coverPhoto)
+    announcement: Vehicle
 }
 
 export default VehicleImage

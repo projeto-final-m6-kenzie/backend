@@ -31,8 +31,8 @@ export interface IUserUpdate {
   email?: string;
   password?: string;
   isAnnouncer?: boolean;
-  dateOfBirth: string;
-  description: string;
+  dateOfBirth?: string;
+  description?: string;
   phone?: string;
 }
 
