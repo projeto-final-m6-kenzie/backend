@@ -18,13 +18,8 @@ class Vehicle {
     @PrimaryGeneratedColumn("uuid")
     readonly id: string
 
-    @Column({length: 30})
-    brand: string
-
-    @Column({
-        length: 30
-    })
-    model: string
+    @Column({length: 140})
+    title: string
 
     @Column({
         type: "enum",
