@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn } from "typeorm"
 import Comment from "./comment.entity"
 import User from "./user.entity"
 import VehicleImage from "./vehicle_image.entity"
@@ -59,7 +59,8 @@ class Vehicle {
     })
     published: boolean
 
-    @OneToOne(() => VehicleImage)
+    @OneToOne(() => VehicleImage, {eager: true})
+    @JoinColumn()
     coverPhoto: VehicleImage;
 
     @CreateDateColumn()

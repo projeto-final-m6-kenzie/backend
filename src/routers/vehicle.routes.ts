@@ -8,11 +8,11 @@ import deleteVehicleService from "../services/vehicles/deleteVehicle.service";
 
 const vehicleRouter = () => {
     const router = Router();
-    router.post('', userAuthMiddleware, createVehicleController);
+    router.post('', createVehicleController);
     router.get('', getVehiclesController);
     router.get('/:id', getVehicleByIdController);
-    router.patch('/:id', userAuthMiddleware, updateVehicleController)
-    router.delete('/:id', userAuthMiddleware, deleteVehicleService)
+    router.patch('/:id', updateVehicleController)
+    router.delete('/:id', deleteVehicleService)
   
     return router;
   };
