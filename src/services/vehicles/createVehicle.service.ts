@@ -7,15 +7,13 @@ import { IAuthReq } from "../../interfaces/users";
 import { IVehicle } from "../../interfaces/vehicles";
 
 const createVehicleService = async (data: IVehicle, user: IAuthReq) => {
-    //if (!user.isAnnouncer) {
-    //    throw new AppError("Apenas anunciantes podem realizar essa operação")
-    //}
+    if (!user.isAnnouncer) {
+       throw new AppError("Apenas anunciantes podem realizar essa operação")
+    }
 
     const userRepository = AppDataSource.getRepository(User)
-    //const userRequest = await userRepository.findOneBy({id: user.id})
-    
-    const userRequest = await userRepository.findOneBy({id: "604a151f-34d5-4cc2-a396-01364467fea7"}) 
-   
+    const userRequest = await userRepository.findOneBy({id: user.id})
+       
     if (!userRequest) {
         throw new AppError("User not found", 404)
     }
