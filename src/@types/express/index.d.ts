@@ -1,4 +1,4 @@
-import { IUser, IUserRequest } from './../../interfaces/users/index';
+import { IComments, IUser, IUserRequest } from './../../interfaces/users/index';
 import * as express from 'express';
 import { IAddress } from '../../interfaces/address';
 
@@ -11,6 +11,7 @@ declare global {
       };
       newUser: IUser;
       address: IAddress
+      newComments: IComments
     }
   }
 }

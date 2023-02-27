@@ -40,3 +40,12 @@ export interface IAuthReq {
   id: string;
   isAnnouncer: boolean;
 }
+
+export interface IComments {
+  id: string;
+  text: string;
+  createdAt: Date;
+  updatedAt: Date;
+  user?: IUser;
+  
+}
