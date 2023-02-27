@@ -57,6 +57,7 @@ const userCreateValidationMiddleware =
       const userRepository = AppDataSource.getRepository(User);
       const userFindByEmail = await userRepository.findOneBy({ email: user.email });
       const userFindByPhone = await userRepository.findOneBy({ phone: user.phone });
+      
       if (userFindByEmail || userFindByPhone) {
         return res.status(400).json({ message: 'This user already exists' });
       }
