@@ -6,7 +6,7 @@ import vehicleRouter from './vehicle.routes';
 const appRouter = (app: Express) => {
   app.use('/users', userRouter());
   app.use('/vehicles', vehicleRouter())
-  app.use('/comment', commentRouter())
+  app.use('/comments', commentRouter())
 
 };
 
