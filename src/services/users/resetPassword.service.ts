@@ -3,7 +3,6 @@ import AppDataSource from "../../data-source"
 import User from "../../entities/user.entity"
 import nodemailer from 'nodemailer'
 import AppError from "../../errors/AppErrors"
-import transporter from "../../transporterNodemailer"
 import Transporter from "../../transporterNodemailer"
 
 const resetPasswordService = async (email: string) => {
@@ -18,11 +17,10 @@ const resetPasswordService = async (email: string) => {
         throw new AppError("Usuário não encontrado")
     }
 
-    const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY as string, { expiresIn: '1h' })
-    await Transporter.initTransporter()
-
+    const token = jwt.sign({ email: user.email, finality: true }, process.env.SECRET_KEY as string, { expiresIn: '1h' })
+    
     const mailOptions = {
-        from: `Grupo 4 - Alex <${Transporter.testAccount?.user}>`,
+        from: `Grupo 4 - Alex <${process.env.SMTP_USER}>`,
         to: user.email,
         subject: 'Recuperação de senha',
         text: `Olá ${user.name},\n\nVocê solicitou uma redefinição de senha em nosso sistema. Para continuar o processo, utilize o seguinte token:\n\n${token}\n\nAtenciosamente,\nEquipe de suporte`,

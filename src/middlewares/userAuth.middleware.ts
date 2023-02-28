@@ -16,8 +16,10 @@ const userAuthMiddleware = (req: Request, res: Response, next: NextFunction) => 
 
         req.user = {
             id: decode.sub,
-            isAnnouncer: decode.isAnnouncer
+            isAnnouncer: decode.isAnnouncer,
+            token: authToken
         }
+
         next()
     })
 }

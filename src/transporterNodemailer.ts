@@ -11,12 +11,12 @@ class Transporter {
     }
   
     public static transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.outlook.com",
       port: 587,
       secure: false,
       auth: {
-        user: "",
-        pass: "",
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
   

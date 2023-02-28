@@ -8,6 +8,7 @@ declare global {
       user: {
         id: string;
         isAnnouncer: boolean;
+        token: string
       };
       newUser: IUser;
       address: IAddress
