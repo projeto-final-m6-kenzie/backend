@@ -1,33 +1,34 @@
 import { IComments, IUser } from './../../interfaces/users/index';
-import AppDataSource from "../../data-source"
+import AppDataSource from '../../data-source';
 
 import Comment from '../../entities/comment.entity';
 import User from '../../entities/user.entity';
 import AppError from '../../errors/AppErrors';
 import Vehicle from '../../entities/vehicle.entity';
 
-const createCommentsService = async (data: IComments, idVehicle: string, user: any) => {
-    const userRepository = AppDataSource.getRepository(User)
-    // const user = await userRepository.findOneBy({id:idUser})
+const createCommentsService = async (
+  text: string,
+  idVehicle: string,
+  user: any
+) => {
+  const userRepository = AppDataSource.getRepository(User);
 
-    // if(!user){
-    //     throw new AppError('Usuario nao encontrado',404)
-    // }
+  const vehicleRepository = AppDataSource.getRepository(Vehicle);
+  const vehicle = await vehicleRepository.findOneBy({ id: idVehicle });
 
-    const vehicleRepository = AppDataSource.getRepository(Vehicle)
-    const vehicle = await vehicleRepository.findOneBy({id: idVehicle})
+  if (!vehicle) {
+    throw new AppError('Anuncio nao encontrado', 404);
+  }
 
-    if(!vehicle){
-        throw new AppError('Anuncio nao encontrado',404)
-    }
+  const commentRepository = AppDataSource.getRepository(Comment);
+  const comment = commentRepository.create({ text });
 
-    const commentRepository = AppDataSource.getRepository(Comment)
-    const comment = commentRepository.create(data)
-    comment.user = user
-    comment.vehicle = vehicle
-    await commentRepository.save(comment)
+  comment.user = user;
+  comment.vehicle = vehicle;
 
-    return comment
-}
+  await commentRepository.save(comment);
 
-export default createCommentsService
+  return comment;
+};
+
+export default createCommentsService;

@@ -10,8 +10,8 @@ declare global {
         isAnnouncer: boolean;
       };
       newUser: IUser;
-      address: IAddress
-      newComments: IComments
+      address: IAddress;
+      newComments: string;
     }
   }
 }
