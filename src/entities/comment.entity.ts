@@ -16,7 +16,7 @@ class Comment {
     @UpdateDateColumn()
     updatedAt: Date
     
-    @ManyToOne(() => User, (user) => user.comments)
+    @ManyToOne(() => User, (user) => user.comments, {eager: true})
     user: User
 
     @ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)

@@ -26,7 +26,7 @@ class User {
     phone: string
 
     @Column({ type: "date", transformer: {
-        from: (value: string) => value.split("-").reverse().join("/"),
+        from: (value: string) => value ? value.split("-").reverse().join("/"): null,
         to: (value: string) => value
     } })
     dateOfBirth: Date
