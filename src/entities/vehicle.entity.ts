@@ -83,7 +83,9 @@ class Vehicle {
   @ManyToOne(() => User, (user) => user.vehicles, { eager: true })
   user: User;
 
-  @OneToMany(() => Comment, (comment) => comment.vehicle)
+  @OneToMany(() => Comment, (comment) => comment.vehicle, {
+    eager: true
+  })
   comments: Comment[];
 
   @OneToMany(() => VehicleImage, (VehicleImage) => VehicleImage.vehicle, {

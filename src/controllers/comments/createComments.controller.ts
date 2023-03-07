@@ -4,7 +4,7 @@ import { instanceToInstance } from 'class-transformer';
 import createCommentsService from '../../services/comments/createComments.service';
 
 const createCommentsController = async (req: Request, res: Response) => {
-  const comment: IComments = req.newComments;
+  const comment: IComments = req.body;
   const user = req.user
   const vehicleId = req.params.vehicleId
   const createUser = await createCommentsService(comment, vehicleId, user);
