@@ -6,13 +6,14 @@ import User from '../../entities/user.entity';
 import AppError from '../../errors/AppErrors';
 import Vehicle from '../../entities/vehicle.entity';
 
-const createCommentsService = async (data: IComments, idVehicle: string, user: any) => {
+const createCommentsService = async (data: IComments, idVehicle: string, userData: any) => {
     const userRepository = AppDataSource.getRepository(User)
-    // const user = await userRepository.findOneBy({id:idUser})
-
-    // if(!user){
-    //     throw new AppError('Usuario nao encontrado',404)
-    // }
+    console.log("user data: ", userData)
+    const user = await userRepository.findOneBy({id:userData.id})
+    console.log("usuário: ", user)
+    if(!user){
+        throw new AppError('Usuario nao encontrado',404)
+    }
 
     const vehicleRepository = AppDataSource.getRepository(Vehicle)
     const vehicle = await vehicleRepository.findOneBy({id: idVehicle})
