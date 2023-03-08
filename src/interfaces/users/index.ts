@@ -47,5 +47,8 @@ export interface IComments {
   createdAt: Date;
   updatedAt: Date;
   user?: IUser;
-  
+}
+
+export interface ICommentsUpdate {
+  text: string;
 }
